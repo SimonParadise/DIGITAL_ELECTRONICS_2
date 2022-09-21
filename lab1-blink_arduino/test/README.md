@@ -7,16 +7,33 @@
 ```c
 int main(void)
 {
+    uint8_t led_value = LOW;  // Local variable to keep LED status
+    uint8_t led_value1 = LOW;
+
     // Set pin where on-board LED is connected as output
-    pinMode(LED_GREEN, OUTPUT);
+    pinMode(LED_RED,OUTPUT );
+    pinMode(LED_GREEN,OUTPUT );
 
     // Infinite loop
     while (1)
     {
-        // Generate a lettre `A` Morse code
+      led_value = LOW;
+      digitalWrite(LED_RED, led_value);
+      _delay_ms(SHORT_DELAY);
+      // Pause several milliseconds
+      led_value = HIGH;
+      digitalWrite(LED_RED, led_value);
+      _delay_ms(SHORT_DELAY);
+      
+      led_value = LOW;
+      digitalWrite(LED_RED, led_value);
+      _delay_ms(LONG_DELAY);
 
-        // WRITE YOUR CODE HERE
+      led_value = HIGH;
+      digitalWrite(LED_RED, led_value);
+      _delay_ms(LONG_DELAY);
 
+     
     }
 
     // Will never reach this
