@@ -1,15 +1,4 @@
 
-This directory is intended for PlatformIO Test Runner and project tests.
-
-Unit Testing is a software testing method by which individual units of
-source code, sets of one or more MCU program modules together with associated
-control data, usage procedures, and operating procedures, are tested to
-determine whether they are fit for use. Unit testing finds problems early
-in the development cycle.
-
-More information about PlatformIO Unit Testing:
-- https://docs.platformio.org/en/latest/advanced/unit-testing/index.html# 
-
 Lab 2: ŠIMON BUCHTA
 
 ### GPIO control registers
@@ -37,4 +26,5 @@ Lab 2: ŠIMON BUCHTA
 
 3. Scheme of traffic light application with one red/yellow/green light for cars, one red/green light for pedestrians, and one push button. Connect AVR device, LEDs, resistors, push button (for pedestrians), and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
 
-   ![your figure]()
+   ![your figure]![290242621_577699890782041_2887593386779895771_n](https://user-images.githubusercontent.com/99410540/195186068-78a0d3ab-2532-4f46-9961-1f7a7a61d775.jpg)
+()
