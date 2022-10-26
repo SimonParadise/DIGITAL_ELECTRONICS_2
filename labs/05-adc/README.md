@@ -84,9 +84,9 @@ The purpose of the laboratory exercise is to understand analog-to-digital conver
    | Right  | 0&nbsp;V | 0   | 0 | 0 |
    | Up     | 0.495&nbsp;V | 101 |  |  |
    | Down   | 1.203&nbsp;V | 246 |  |  |
-   | Left   |  |  |  |  |
-   | Select |  |  |  |  |
-   | none   |  |  |  |  |
+   | Left   | 1.97 V | 403 |  |  |
+   | Select | 3.18 V |  |  |  |
+   | none   | 5 V |  |  |  |
 
    ![SimulIDE](images/screenshot_simulide_lcd_probe.png)
 
@@ -116,11 +116,11 @@ AVR ADC module has 10-bit resolution with +/-2LSB accuracy. It means it returns 
    | :-- | :-: | :-: | :-- |
    | Voltage reference    | ADMUX | REFS1:0 | 00: ..., 01: AVcc voltage reference (5V), ... |
    | Input channel        | ADMUX | MUX3:0 | 0000: ADC0, 0001: ADC1, ... |
-   | ADC enable           | ADCSRA |  |  |
-   | Start conversion     |  |  |  |
-   | ADC interrupt enable |  |  |  |
-   | ADC clock prescaler  |  | ADPS2:0 | 000: Division factor 2, 001: 2, 010: 4, ...|
-   | ADC 10-bit result    |  |  |  |
+   | ADC enable           | ADCSRA | ADEN |  |
+   | Start conversion     | ADCSRA | ADSC |  |
+   | ADC interrupt enable | ADCSRA | ADIE |  |
+   | ADC clock prescaler  | ADCSRA | ADPS2:0 | 000: Division factor 2, 001: 2, 010: 4, ...|
+   | ADC 10-bit result    | ADLAR |  |  |
 
 3. Copy/paste [template code](https://raw.githubusercontent.com/tomas-fryza/digital-electronics-2/master/labs/05-adc/main.c) to `LAB5-ADC > src > main.c` source file.
 
