@@ -1,0 +1,68 @@
+\hypertarget{group__fryza__asm}{}\doxysection{Assembly functions}
+\label{group__fryza__asm}\index{Assembly functions@{Assembly functions}}
+
+
+Function(s) written in AVR Assembly language.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__fryza__asm_gaa914b0267382586518366dcff0d958b9}{multiply\+\_\+accumulate\+\_\+asm}} (uint8\+\_\+t result, uint8\+\_\+t a, uint8\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Multiply-\/and-\/\+Accumulate operation, ie. result = result + (a$\ast$b). \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__fryza__asm_ga73300f0d004c2b00b877e2285c99b1f2}{lfsr4\+\_\+fibonacci\+\_\+asm}} (uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em LFSR-\/based 4-\/bit pseudo-\/random generator with Fibonacci architecture. Taps are 4, 3. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function(s) written in AVR Assembly language. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__fryza__asm_ga73300f0d004c2b00b877e2285c99b1f2}\label{group__fryza__asm_ga73300f0d004c2b00b877e2285c99b1f2}} 
+\index{Assembly functions@{Assembly functions}!lfsr4\_fibonacci\_asm@{lfsr4\_fibonacci\_asm}}
+\index{lfsr4\_fibonacci\_asm@{lfsr4\_fibonacci\_asm}!Assembly functions@{Assembly functions}}
+\doxysubsubsection{\texorpdfstring{lfsr4\_fibonacci\_asm()}{lfsr4\_fibonacci\_asm()}}
+{\footnotesize\ttfamily uint8\+\_\+t lfsr4\+\_\+fibonacci\+\_\+asm (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+LFSR-\/based 4-\/bit pseudo-\/random generator with Fibonacci architecture. Taps are 4, 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Current value of LFSR \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New value of LFSR 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Function programmed in AVR assembly language. 
+\end{DoxyNote}
+\mbox{\Hypertarget{group__fryza__asm_gaa914b0267382586518366dcff0d958b9}\label{group__fryza__asm_gaa914b0267382586518366dcff0d958b9}} 
+\index{Assembly functions@{Assembly functions}!multiply\_accumulate\_asm@{multiply\_accumulate\_asm}}
+\index{multiply\_accumulate\_asm@{multiply\_accumulate\_asm}!Assembly functions@{Assembly functions}}
+\doxysubsubsection{\texorpdfstring{multiply\_accumulate\_asm()}{multiply\_accumulate\_asm()}}
+{\footnotesize\ttfamily uint8\+\_\+t multiply\+\_\+accumulate\+\_\+asm (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{result,  }\item[{uint8\+\_\+t}]{a,  }\item[{uint8\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+Multiply-\/and-\/\+Accumulate operation, ie. result = result + (a$\ast$b). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Current MAC value \\
+\hline
+{\em a} & Value A \\
+\hline
+{\em b} & Value B \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New MAC value 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Function programmed in AVR assembly language. 
+\end{DoxyNote}

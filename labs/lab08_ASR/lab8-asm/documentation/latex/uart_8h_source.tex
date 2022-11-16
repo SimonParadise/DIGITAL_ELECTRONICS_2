@@ -1,0 +1,98 @@
+\hypertarget{uart_8h_source}{}\doxysection{uart.\+h}
+\label{uart_8h_source}\index{lib/uart/uart.h@{lib/uart/uart.h}}
+\mbox{\hyperlink{uart_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef UART\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\# define UART\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{comment}{/************************************************************************}}
+\DoxyCodeLine{5 \textcolor{comment}{*  Title:    Interrupt UART library with receive/transmit circular buffers}}
+\DoxyCodeLine{6 \textcolor{comment}{*  Author:   Peter Fleury <pfleury@gmx.ch>  http://tinyurl.com/peterfleury}}
+\DoxyCodeLine{7 \textcolor{comment}{*  File:     \$Id: uart.h,v 1.13 2015/01/11 13:53:25 peter Exp \$}}
+\DoxyCodeLine{8 \textcolor{comment}{*  Software: AVR-\/GCC 4.x, AVR Libc 1.4 or higher}}
+\DoxyCodeLine{9 \textcolor{comment}{*  Hardware: any AVR with built-\/in UART/USART}}
+\DoxyCodeLine{10 \textcolor{comment}{*  Usage:    see Doxygen manual}}
+\DoxyCodeLine{11 \textcolor{comment}{*}}
+\DoxyCodeLine{12 \textcolor{comment}{*  LICENSE:}}
+\DoxyCodeLine{13 \textcolor{comment}{*   Copyright (C) 2015 Peter Fleury, GNU General Public License Version 3}}
+\DoxyCodeLine{14 \textcolor{comment}{*}}
+\DoxyCodeLine{15 \textcolor{comment}{*   This program is free software; you can redistribute it and/or modify}}
+\DoxyCodeLine{16 \textcolor{comment}{*   it under the terms of the GNU General Public License as published by}}
+\DoxyCodeLine{17 \textcolor{comment}{*   the Free Software Foundation; either version 3 of the License, or}}
+\DoxyCodeLine{18 \textcolor{comment}{*   any later version.}}
+\DoxyCodeLine{19 \textcolor{comment}{*}}
+\DoxyCodeLine{20 \textcolor{comment}{*   This program is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{21 \textcolor{comment}{*   but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{22 \textcolor{comment}{*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the}}
+\DoxyCodeLine{23 \textcolor{comment}{*   GNU General Public License for more details.}}
+\DoxyCodeLine{24 \textcolor{comment}{*}}
+\DoxyCodeLine{25 \textcolor{comment}{************************************************************************/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include <avr/pgmspace.h>}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#if (\_\_GNUC\_\_ * 100 + \_\_GNUC\_MINOR\_\_) < 405}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\# error "{}This library requires AVR-\/GCC 4.5 or later, update to newer AVR-\/GCC compiler !"{}}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 }
+\DoxyCodeLine{61 \textcolor{comment}{/*}}
+\DoxyCodeLine{62 \textcolor{comment}{** constants and macros}}
+\DoxyCodeLine{63 \textcolor{comment}{*/}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define UART\_BAUD\_SELECT(baudRate, xtalCpu) (((xtalCpu) + 8UL * (baudRate)) / (16UL * (baudRate)) -\/ 1UL)}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define UART\_BAUD\_SELECT\_DOUBLE\_SPEED(baudRate, xtalCpu) ( ((((xtalCpu) + 4UL * (baudRate)) / (8UL * (baudRate)) -\/ 1UL)) | 0x8000)}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#ifndef UART\_RX\_BUFFER\_SIZE}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\# define UART\_RX\_BUFFER\_SIZE 64}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#ifndef UART\_TX\_BUFFER\_SIZE}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\# define UART\_TX\_BUFFER\_SIZE 64}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{comment}{/* test if the size of the circular buffers fits into SRAM */}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#if ( (UART\_RX\_BUFFER\_SIZE + UART\_TX\_BUFFER\_SIZE) >= (RAMEND -\/ 0x60 ) )}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\# error "{}size of UART\_RX\_BUFFER\_SIZE + UART\_TX\_BUFFER\_SIZE larger than size of SRAM"{}}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{/*}}
+\DoxyCodeLine{102 \textcolor{comment}{** high byte error return code of uart\_getc()}}
+\DoxyCodeLine{103 \textcolor{comment}{*/}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define UART\_FRAME\_ERROR     0x1000 }}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define UART\_OVERRUN\_ERROR   0x0800 }}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#define UART\_PARITY\_ERROR    0x0400 }}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#define UART\_BUFFER\_OVERFLOW 0x0200 }}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#define UART\_NO\_DATA         0x0100 }}
+\DoxyCodeLine{111 \textcolor{comment}{/*}}
+\DoxyCodeLine{112 \textcolor{comment}{** function prototypes}}
+\DoxyCodeLine{113 \textcolor{comment}{*/}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{120 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_gac19a76bb7d446125734a67f9f4b68991}{uart\_init}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} baudrate);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 }
+\DoxyCodeLine{147 \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__pfleury__uart_gaefaab30a8338ec46a6be35b99b1b4f09}{uart\_getc}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 }
+\DoxyCodeLine{155 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_gad975221bc08b901e4c7ad69f9c9a97e2}{uart\_putc}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} data);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 }
+\DoxyCodeLine{168 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_gae52facc0a56086a365bb0018160d8d71}{uart\_puts}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 }
+\DoxyCodeLine{182 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_ga6d78b6744db6232f52b4616402036c2f}{uart\_puts\_p}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#define uart\_puts\_P(\_\_s) uart\_puts\_p(PSTR(\_\_s))}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_ga4db697cb5469fd70e794fa7df73a6d6a}{uart1\_init}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} baudrate);}
+\DoxyCodeLine{193 \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__pfleury__uart_gaeb1405c641e5bc9b7224018f5e8d90de}{uart1\_getc}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{195 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_gab465f689d197fadfbacc374fc9411154}{uart1\_putc}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} data);}
+\DoxyCodeLine{197 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_ga5568f8f3913b218fd4d0346af78831b2}{uart1\_puts}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{199 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__pfleury__uart_ga1e8074d0a2d5922601c5db2f9777ba79}{uart1\_puts\_p}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#define uart1\_puts\_P(\_\_s) uart1\_puts\_p(PSTR(\_\_s))}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{206 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// UART\_H}}
+
+\end{DoxyCode}
