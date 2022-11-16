@@ -33,18 +33,18 @@ The purpose of the laboratory exercise is to understand the AVR instruction set 
 
    | **Instruction** | **Operation** | **Description** | **Cycles** |
    | :-- | :-: | :-- | :-: |
-   | `add Rd, Rr` |  |  |  |
+   | `add Rd, Rr` | Rd = Rd + Rr | logical OR between Rd and Rr |  |
    | `andi Rd, K` | Rd = Rd and K | Logical AND between register Rd and 8-bit constant K | 1 |
-   | `bld Rd, b` |  |  |  |
-   | `bst Rd, b` |  |  |  |
-   | `com Rd` |  |  |  |
-   | `eor Rd, Rr` |  |  |  |
-   | `mul Rd, Rr` |  |  |  |
-   | `pop Rd` |  |  |  |
-   | `push Rr` |  |  |  |
-   | `ret` |  |  |  |
-   | `rol Rd` |  |  |  |
-   | `ror Rd` |  |  |  |
+   | `bld Rd, b` | Rd = T | bit load from T to register Rd |  |
+   | `bst Rr, b` | T = Rr(b) | bit store from register to T |  |
+   | `com Rd` | Rd = 0xff - Rd | ones complement |  |
+   | `eor Rd, Rr` | Rd = Rd ⊕ Rr | exclusive or between Rd and Rr |  |
+   | `mul Rd, Rr` | R1:R0	=	Rd x Rr (UU) | multiply unsigned |  |
+   | `pop Rd` | Rd = STACK | pop register from stack |  |
+   | `push Rr` | STACK = Rr | push regiser on stack |  |
+   | `ret` | PC = STACK | Subroutine Return |  |
+   | `rol Rd` | temp = C, C = Rd(7), Rd(n+1) = Rd(n) (n=6..0), Rd(0) = temp | Rotate Left Through Carry |  |
+   | `ror Rd` | temp = C, C = Rd(0), Rd(n) = Rd(n+1) (n=0..6), Rd(7) = temp | rotate right through carry |  |
 
 <a name="part1"></a>
 
