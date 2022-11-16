@@ -112,7 +112,7 @@ Parameters between C and assembly may be passed via registers and/or the Stack m
 
    | **Instruction** | **Binary opcode** | **Hex opcode** | **Compiler Hex opcode** |
    | :-- | :-: | :-: | :-: |
-   | `add r24, r0` | 0000_1101_1000_0000 |  |  |
+   | `add r24, r0` | 0000_1101_1000_0000 | D80 |  |
    | `mul r22, r20` | 1001_1111_0110_0100 | `9F64` |  |
    | `ret` | `1001_0101_0000_1000` | `95 08` |  |
 
