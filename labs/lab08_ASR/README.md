@@ -112,9 +112,9 @@ Parameters between C and assembly may be passed via registers and/or the Stack m
 
    | **Instruction** | **Binary opcode** | **Hex opcode** | **Compiler Hex opcode** |
    | :-- | :-: | :-: | :-: |
-   | `add r24, r0` |  |  |  |
-   | `mul r22, r20` |  |  |  |
-   | `ret` | `1001_0101_0000_1000` | `95 08` |  |
+   | `add r24, r0` | 0000_1101_1000_0000 | D80 | 80 0D |
+   | `mul r22, r20` | 1001_1111_0110_0100 | `9F64` | 64 9F |
+   | `ret` | `1001_0101_0000_1000` | `95 08` | 08 95 |
 
 6. Build and upload the code to Arduino Uno board. Use **PlatformIO: Serial Monitor** to receive values from Arduino board.
 
@@ -148,15 +148,15 @@ A maximum-length LFSR produces an m-sequence i.e. it cycles through all possible
 
    | **Tap position** | **Generated values** | **Length** |
    | :-: | :-- | :-: |
-   | 4, 3 |  |  |
-   | 4, 2 |  |  |
-   | 4, 1 |  |  |
+   | 4, 3 | 0 1 3 7 14 13 11 6 12 9 2 5 10 4 8 | 15 |
+   | 4, 2 | 0 1 3 6 12 8 | 6 |
+   | 4, 1 | 0 1 2 5 10 4 9 3 6 13 11 7 14 12 8  | 15 |
 
 2. Change [LFSR tap positions](https://courses.cs.washington.edu/courses/cse369/15au/labs/xapp052_LFSRs.pdf) in `lfsr4_fibonacci_asm` function and generate 5-, 6-, and 7-bit versions of pseudorandom sequence. Do not forget to change the binary mask used to clear unused bits in input/output register.
 
    | **Tap position** | **Length** |
    | :-: | :-: |
-   | &nbsp; |  |
+   | 5, 3 | 31 |
    | &nbsp; |  |
    | &nbsp; |  |
 
